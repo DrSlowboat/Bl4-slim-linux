@@ -1,12 +1,12 @@
 # Borderlands 4 Linux Slimmer
 
-Borderlands 4 takes up a massive amount of space on your disk drive by storing old patch data and keeping voice packs that may be redundant to you. This python script trims the fat to make it much easier to justify keeping it on your disk drive. All credit for the original idea goes to [nanafy](https://github.com/nanafy/bl-slim) but since using powershell on Linux requires you to download a whole host of files you may not need for anything else, this is a python script you can try to use instead.
+Borderlands 4 takes up a massive amount of space on your disk drive by storing old patch data and keeping voice packs that you're probably never going to use. This python script trims the fat to make it much easier to justify keeping it on your storage drive. All credit for the original idea goes to [nanafy](https://github.com/nanafy/bl-slim) but since using powershell on Linux requires you to download a whole host of files you may not need for anything else, this is a python script you can try to use instead. Nanafy's will still work if you download all the tools for powershell, and there's a fork of their repository that's meant for steamOS you can try instead.
 
 > **Note:** Unlike Nanafy's script this doesn't cover BL3 because I don't currently have that installed and it seemed like too much work. If there's sufficient interest, I can implement it for that game as well, but feel free to adapt the current script to fit that game if you'd like and post it on GitHub. 
 
 ## Space Savings
 
-By dropping unused foreign voice packs and deleting old patch data (leaving active game data untouched), you can reclaim massive amounts of disk space. For example, if you only keep English, you can expect to see something like this:
+By dropping unused foreign voice packs and deleting old patch data (without touching any actively useful game data), you can reclaim massive amounts of disk space from BL4 that you don't need to run the game. For example, if you only keep the English language pack, you can expect to see something like this:
 
 ```text
 Before:    189.26 GB
@@ -20,20 +20,35 @@ Saved:     134.11 GB
 
 ## Prerequisites
 
-* Linux with an `ext4`, `btrfs`, or `xfs` drive.
-* Python 3.x installed.
+* Linux with an `ext4`, `btrfs`, or `xfs` drive (This will not work if you're dual booting and running BL4 off an NTFS drive on Linux).
+* Python 3.x and pip installed. Pretty much every linux distro will come with Python and pip preinstalled, but just in case yours doesn't, install them using your distro's package manager:
+
+* **Ubuntu / Debian:**
+  ```bash
+  sudo apt update && sudo apt install python3 python3-pip
+  ```
+  
+* **Fedora:**
+  ```bash
+  sudo dnf install python3 python3-pip
+  ```
+  
+* **Arch:**
+  ```bash
+  sudo pacman -S python python-pip
+  ```
 
 ---
 
 ## How to Use
 
 1. Ensure Borderlands 4 is completely closed and Steam isn't actively updating or verifying files.
-2. Place `bl_slim.py` in your game folder or anywhere on your Linux system.
-3. Make the script executable by first navigating to the folder it's in with cd or navigating to the folder with your file browser and opening a terminal window there, then type:
+2. Place `bl_slim.py` in a place where you can keep track of it easily (you'll need to run the script again after every update).
+3. Make the script executable by navigating to the folder it's in with cd or navigating to the folder with your file browser and opening a terminal window there, then type:
    ```bash
    chmod +x bl_slim.py
    ```
-4. Run a dry-run scan first to preview what can be removed:
+4. Run a dry-run scan first to preview what can be removed (you can skip this step if you've already used it and it's worked):
    ```bash
    ./bl_slim.py -Scan
    ```
@@ -81,4 +96,4 @@ After any patch of the game, you will need to redo this process since steam will
 
 ## Testing
 
-This file has been tested on CachyOS. If it's successfully worked for you on any other Arch, Debian or Fedora repositories, let me know. Obviously, this script is use at your own risk and is covered by the MIT license which states the same. 
+This file has been tested on CachyOS. If it's successfully worked for you on any other Arch, Debian or Fedora distros, let me know so I can update this. Obviously, this script is use at your own risk and is covered by the MIT license which states the same. 
