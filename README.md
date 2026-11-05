@@ -2,6 +2,8 @@
 
 Borderlands 4 takes up a massive amount of space on your disk drive by storing old patch data and keeping voice packs that may be redundant to you. This python script trims the fat to make it much easier to justify keeping it on your disk drive. All credit for the original idea goes to [nanafy](https://github.com/nanafy/bl-slim) but since using powershell on Linux requires you to download a whole host of files you may not need for anything else, this is a python script you can try to use instead.
 
+> **Note:** Unlike Nanafy's script this doesn't cover BL3 because I don't currently have that installed and it seemed like too much work. If there's sufficient interest, I can implement it for that game as well, but feel free to adapt the current script to fit that game if you'd like and post it on GitHub. 
+
 ## Space Savings
 
 By dropping unused foreign voice packs and deleting old patch data (leaving active game data untouched), you can reclaim massive amounts of disk space. For example, if you only keep English, you can expect to see something like this:
@@ -76,3 +78,7 @@ If you ever want to restore your game to its full factory size, open Steam, righ
 ## Post-Patch
 
 After any patch of the game, you will need to redo this process since steam will redownload all the missing files. This effectively makes the program a lot less useful since you need to have that amount of spare space on your drive just to update it, but c'est la vie. 
+
+## Testing
+
+This file has been tested on CachyOS. If it's successfully worked for you on any other Arch, Debian or Fedora repositories, let me know. Obviously, this script is use at your own risk and is covered by the MIT license which states the same. 
