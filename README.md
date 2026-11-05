@@ -1,0 +1,78 @@
+# Borderlands 4 Linux Slimmer
+
+Borderlands 4 takes up a massive amount of space on your disk drive by storing old patch data and keeping voice packs that may be redundant to you. This python script trims the fat to make it much easier to justify keeping it on your disk drive. All credit for the original idea goes to [nanafy](https://github.com/nanafy/bl-slim) but since using powershell on Linux requires you to download a whole host of files you may not need for anything else, this is a python script you can try to use instead.
+
+## Space Savings
+
+By dropping unused foreign voice packs and deleting old patch data (leaving active game data untouched), you can reclaim massive amounts of disk space. For example, if you only keep English, you can expect to see something like this:
+
+```text
+Before:    189.26 GB
+After:       55.14 GB
+Saved:     134.11 GB
+```
+
+> **Note:** Standard desktop file browsers (like Dolphin or Nautilus) report the *apparent* file size because the file lengths don't change. To see your actual reclaimed disk space, use terminal commands like `du -sh` on your Borderlands 4 game folder.
+
+---
+
+## Prerequisites
+
+* Linux with an `ext4`, `btrfs`, or `xfs` drive.
+* Python 3.x installed.
+
+---
+
+## How to Use
+
+1. Ensure Borderlands 4 is completely closed and Steam isn't actively updating or verifying files.
+2. Place `bl_slim.py` in your game folder or anywhere on your Linux system.
+3. Make the script executable by first navigating to the folder it's in with cd or navigating to the folder with your file browser and opening a terminal window there, then type:
+   ```bash
+   chmod +x bl_slim.py
+   ```
+4. Run a dry-run scan first to preview what can be removed:
+   ```bash
+   ./bl_slim.py -Scan
+   ```
+5. Run the script to apply the changes:
+   ```bash
+   ./bl_slim.py
+   ```
+   * *If the script cannot automatically locate your Steam library, it will prompt you to paste your Borderlands 4 game folder path.*
+   * *Follow the interactive prompt to select which voice languages to keep (English is always kept automatically, the game breaks without it).*
+
+### Command-Line Options
+
+| Command | What it does |
+|---|---|
+| `./bl_slim.py -Scan` | Dry run showing space savings without modifying any files. |
+| `./bl_slim.py -Keep "English(US)"` | Keeps specified language(s) without interactive prompts. |
+| `./bl_slim.py -GameDir "/path/to/Borderlands 4"` | Targets a specific game installation directory directly. |
+| `./bl_slim.py -Yes` | Skips the "Go ahead? (y/n)" confirmation prompt. |
+
+---
+
+## Proton & Steam Launch Options (Linux / Wayland)
+
+Running BL4 on Linux can be a bit of a pain because it doesn't play well with Wayland. Before you run this script, make sure your game can actually run.
+
+If the game hangs on a black screen or fails to open a window while Steam says "Running", add these launch options to Borderlands 4 in Steam (Right-click game -> **Properties** -> **General** -> **Launch Options**):
+
+```bash
+SteamDeck=0 PROTON_USE_WAYLAND=1 %command%
+```
+Add any others you'd like to use alongside those. I specifically use proton-Experimental because I've had little luck with other compatibility tools.
+
+* **`SteamDeck=0`**: Forces desktop initialization, bypassing Steam Deck-specific hardware profiles and controller hooks.
+* **`PROTON_USE_WAYLAND=1`**: Bypasses `Xwayland` and uses Wine's native Wayland driver inside Proton Experimental to prevent DX12 swapchain deadlocks on Plasma and Gnome. 
+
+---
+
+## Undoing Changes
+
+If you ever want to restore your game to its full factory size, open Steam, right-click **Borderlands 4** -> **Properties** -> **Installed Files** -> and click **Verify integrity of game files**. Steam will redownload any cleared data. 
+
+## Post-Patch
+
+After any patch of the game, you will need to redo this process since steam will redownload all the missing files. This effectively makes the program a lot less useful since you need to have that amount of spare space on your drive just to update it, but c'est la vie. 
