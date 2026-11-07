@@ -58,8 +58,8 @@ Of course, if you're using a distro that doesn't come with these preinstalled yo
    ```bash
    ./bl_slim.py
    ```
-   * *If the script cannot automatically locate your Steam library, it will prompt you to paste your Borderlands 4 game folder path.*
-   * *Follow the interactive prompt to select which voice languages to keep (English is always kept automatically, the game breaks without it).*
+   * If the script cannot automatically locate your Steam library, it will prompt you to paste your Borderlands 4 game folder path. You can find this by going to **Properties** -> **Installed Files** -> **Browse** and copy/pasting the path from your file browser.
+   * Follow the prompt to select which voice languages to keep (English is always kept automatically, the game breaks without it).
 
 ### Command-Line Options
 
@@ -82,7 +82,7 @@ If the game hangs on a black screen or fails to open a window while Steam says "
 SteamDeck=0 PROTON_ENABLE_WAYLAND=1 PROTON_USE_WAYLAND=1 %command% 
 ```
 
-Add any others you'd like to use alongside those. I specifically use proton-Experimental because I've had little luck with other compatibility tools. You can set it to proton-Experimental from the compatibility tab directly below general. 
+Add any others you'd like to use alongside those. I specifically use proton-Experimental because I've had little luck with other compatibility tools. You can change your compatibility tool to Proton Experimental from the compatibility tab directly below general. 
 
 ---
 
