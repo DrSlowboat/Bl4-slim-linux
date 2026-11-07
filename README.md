@@ -76,7 +76,7 @@ Of course, if you're using a distro that doesn't come with these preinstalled yo
 
 Running BL4 on Linux can be a bit of a pain because it doesn't play well with Wayland, and even less well with Mutter. Before you run this script, make sure your game can actually run.
 
-If the game hangs on a black screen or fails to open a window while Steam says "Running", add these launch options to Borderlands 4 in Steam (Right-click game -> **Properties** -> **General** -> **Launch Options**):
+If the game hangs on a black screen or fails to open a window while Steam says "Running", add these launch options to Borderlands 4 in Steam (Right-click game -> **Properties** -> **General** -> **Launch Options**): 
 
 ```bash
 SteamDeck=0 PROTON_ENABLE_WAYLAND=1 PROTON_USE_WAYLAND=1 %command% 
