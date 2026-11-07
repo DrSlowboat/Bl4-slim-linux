@@ -38,12 +38,14 @@ Saved:     134.11 GB
   sudo pacman -S python python-pip
   ```
 
+Of course, if you're using a distro that doesn't come with these preinstalled you're probably building Linux from scratch and know way more about it than I do, but never hurts to make sure.
+
 ---
 
 ## How to Use
 
 1. Ensure Borderlands 4 is completely closed and Steam isn't actively updating or verifying files.
-2. Place `bl_slim.py` in a place where you can keep track of it easily (you'll need to run the script again after every update).
+2. Place `bl_slim.py` in a place where you can keep track of it easily (you'll probably need to run the script again after every update).
 3. Make the script executable by navigating to the folder it's in with cd or navigating to the folder with your file browser and opening a terminal window there, then type:
    ```bash
    chmod +x bl_slim.py
@@ -72,18 +74,15 @@ Saved:     134.11 GB
 
 ## Proton & Steam Launch Options (Linux / Wayland)
 
-Running BL4 on Linux can be a bit of a pain because it doesn't play well with Wayland. Before you run this script, make sure your game can actually run.
+Running BL4 on Linux can be a bit of a pain because it doesn't play well with Wayland, and even less well with Mutter. Before you run this script, make sure your game can actually run.
 
 If the game hangs on a black screen or fails to open a window while Steam says "Running", add these launch options to Borderlands 4 in Steam (Right-click game -> **Properties** -> **General** -> **Launch Options**):
 
 ```bash
-SteamDeck=0 PROTON_USE_WAYLAND=1 %command%
+SteamDeck=0 PROTON_ENABLE_WAYLAND=1 PROTON_USE_WAYLAND=1 %command% 
 ```
-Add any others you'd like to use alongside those. I specifically use proton-Experimental because I've had little luck with other compatibility tools.
 
-* **`SteamDeck=0`**: Forces desktop initialization, bypassing Steam Deck-specific hardware profiles and controller hooks.
-* **`PROTON_USE_WAYLAND=1`**: Bypasses `Xwayland` and uses Wine's native Wayland driver inside Proton Experimental to prevent DX12 swapchain deadlocks on Plasma and Gnome. 
-
+Add any others you'd like to use alongside those. I specifically use proton-Experimental because I've had little luck with other compatibility tools. You can set it to proton-Experimental from the compatibility tab directly below general. 
 ---
 
 ## Undoing Changes
@@ -92,8 +91,18 @@ If you ever want to restore your game to its full factory size, open Steam, righ
 
 ## Post-Patch
 
-After any patch of the game, you will need to redo this process since steam will redownload all the missing files. This effectively makes the program a lot less useful since you need to have that amount of spare space on your drive just to update it, but c'est la vie. 
+After any patch of the game, you will probably need to redo this process since steam will redownload all the missing files. This effectively makes the program a lot less useful since you need to have that amount of spare space on your drive just to update it, but c'est la vie. 
 
 ## Testing
 
-This file has been tested on CachyOS. If it's successfully worked for you on any other Arch, Debian or Fedora distros, let me know so I can update this. Obviously, this script is use at your own risk and is covered by the MIT license which states the same. 
+This script has been tested on CachyOS. The full list of launch commands I use is:
+
+```bash
+SteamDeck=0 WINEDLLOVERRIDES="dsound=n,b" PROTON_ENABLE_WAYLAND=1 PROTON_USE_WAYLAND=1 WAYLANDDRV_PRIMARY_MONITOR=DP-1 ENABLE_LAYER_MESA_ANTI_LAG=1 PROTON_FSR_UPGRADE=1 %command% -NoStartupMovies -pf_tricks=vcrun2022
+```
+
+WINEDLLOVERRIDES="dsound=n,b" and pf_tricks=vcrun2022 are because I'm running SDK mods (it's ridiculous that the game still hasn't separated the grapple and melee key). Mesa Anti Lag and FSR upgrade are because I'm on an AMD GPU. WAYLANDDRV is because the game was booting on my secondary monitor instead of my primary and I was getting a perpetual loading cursor over my game screen. 
+
+If it's successfully worked for you on any other Arch, Debian or Fedora distros, let me know so I can update this. Obviously, this script is use at your own risk and is covered by the MIT license which states the same. 
+
+

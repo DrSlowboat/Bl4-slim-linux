@@ -336,7 +336,6 @@ class Slim:
         self.chunks: dict[int, list[str]] = {}
         self.pak_cache: dict[str, Pak | None] = {}
 
-        # Map lowercase path -> actual path on disk for case-insensitive lookup
         self.disk_paths: dict[str, str] = {}
         found = []
         for entry in os.listdir(paks_dir):
@@ -619,8 +618,7 @@ def main():
 
     if not keep:
         keep = [langs[0]] if len(langs) == 1 else ["English(US)"]
-
-    # Normalize language casing and deduplicate while preserving order
+ 
     normalized_keep = []
     for k in keep:
         canonical = lang_map.get(k.lower(), k)
@@ -669,7 +667,7 @@ def main():
     print(f"After:   {fmt_size(after)}")
     print(f"Saved:   {fmt_size(before - after)}")
     if s.todo:
-        print('Note: Standard file browsers show apparent size. Use "du -sh" to see actual disk space used.')
+        print('Note: Standard file browsers show apparent size. Use "du -sh" on your BL4 folder to see the actual folder size.')
 
 
 if __name__ == "__main__":
