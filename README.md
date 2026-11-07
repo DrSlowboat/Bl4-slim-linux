@@ -83,6 +83,7 @@ SteamDeck=0 PROTON_ENABLE_WAYLAND=1 PROTON_USE_WAYLAND=1 %command%
 ```
 
 Add any others you'd like to use alongside those. I specifically use proton-Experimental because I've had little luck with other compatibility tools. You can set it to proton-Experimental from the compatibility tab directly below general. 
+
 ---
 
 ## Undoing Changes
